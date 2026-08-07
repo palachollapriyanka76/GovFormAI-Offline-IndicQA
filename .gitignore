@@ -1,0 +1,42 @@
+# Python Caches & Virtualenvs
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.coverage
+
+# Model Checkpoints & Large Binaries (Ignore heavy weights to keep git pushes/pulls fast)
+model/checkpoints/*
+!model/checkpoints/.gitkeep
+model/quant/*
+!model/quant/.gitkeep
+*.bin
+*.gguf
+*.safetensors
+*.pth
+*.ckpt
+*.onnx
+*.tflite
+*.pt
+
+# Android / Gradle Build Outputs
+app/.gradle/
+app/build/
+app/captures/
+app/.externalNativeBuild/
+app/.cxx/
+app/local.properties
+*.apk
+*.aab
+
+# OS & IDE Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
