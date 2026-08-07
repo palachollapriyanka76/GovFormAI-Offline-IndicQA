@@ -1,0 +1,19 @@
+{
+  "dataset_version": "2.0.0",
+  "total_forms": 120,
+  "categories": [
+    "Identity & Citizenship (Aadhaar, Voter ID, Passport)",
+    "Taxation & Finance (PAN, Form 16, Income Certificate)",
+    "Social Welfare & Pensions (Ration Card, Old Age Pension)",
+    "Land & Agriculture (Kisan Credit Card, Land Mutations)",
+    "Education & Employment (Scholarship Forms, Employment Reg)"
+  ],
+  "supported_languages": ["hi", "ta", "te", "kn", "mr", "bn", "gu"],
+  "forms": [
+    { "id": "FORM_001", "name": "Aadhaar Address Update Form", "fields": 14, "language": "hi" },
+    { "id": "FORM_002", "name": "PAN Card Application Form 49A", "fields": 18, "language": "hi" },
+    { "id": "FORM_003", "name": "Income & Asset Certificate Form", "fields": 12, "language": "te" },
+    { "id": "FORM_004", "name": "Ration Card Renewal Application", "fields": 15, "language": "ta" },
+    { "id": "FORM_005", "name": "Kisan Credit Card (KCC) Scheme Form", "fields": 20, "language": "kn" }
+  ]
+}

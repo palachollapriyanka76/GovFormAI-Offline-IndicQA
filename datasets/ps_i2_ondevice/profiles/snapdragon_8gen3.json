@@ -1,0 +1,9 @@
+{
+  "profile_id": "snapdragon_8gen3",
+  "chipset": "Qualcomm Snapdragon 8 Gen 3",
+  "arch": "arm64-v8a",
+  "total_ram_gb": 12,
+  "max_allowed_model_ram_gb": 4.8,
+  "target_tokens_per_sec": 24.5,
+  "target_ttft_ms": 110.0
+}
