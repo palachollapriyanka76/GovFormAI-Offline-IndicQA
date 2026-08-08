@@ -1,0 +1,11 @@
+{
+  "profile_id": "sub_12k_3gb_ram",
+  "device_name": "Budget Android Handset (Sub-Rs. 12,000 Class)",
+  "total_system_ram_mb": 3072,
+  "max_allowed_resident_set_size_mb": 1200,
+  "cpu_architecture": "arm64-v8a",
+  "recommended_quantizations": ["Q4_K_M", "Q4_0", "Q3_K_M"],
+  "target_ttft_ms_max": 350,
+  "target_min_tokens_per_sec": 12.0,
+  "network_requirement": "Strict zero-network offline mode"
+}

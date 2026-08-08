@@ -1,19 +1,110 @@
 {
-  "dataset_version": "2.0.0",
+  "dataset_version": "2.1.0",
   "total_forms": 120,
+  "supported_languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+  "target_memory_limit_mb": 1200,
   "categories": [
     "Identity & Citizenship (Aadhaar, Voter ID, Passport)",
     "Taxation & Finance (PAN, Form 16, Income Certificate)",
-    "Social Welfare & Pensions (Ration Card, Old Age Pension)",
-    "Land & Agriculture (Kisan Credit Card, Land Mutations)",
+    "Social Welfare & Pensions (Ration Card, Old Age Pension, Ayushman Bharat)",
+    "Land & Agriculture (Kisan Credit Card, PM-Kisan)",
     "Education & Employment (Scholarship Forms, Employment Reg)"
   ],
-  "supported_languages": ["hi", "ta", "te", "kn", "mr", "bn", "gu"],
   "forms": [
-    { "id": "FORM_001", "name": "Aadhaar Address Update Form", "fields": 14, "language": "hi" },
-    { "id": "FORM_002", "name": "PAN Card Application Form 49A", "fields": 18, "language": "hi" },
-    { "id": "FORM_003", "name": "Income & Asset Certificate Form", "fields": 12, "language": "te" },
-    { "id": "FORM_004", "name": "Ration Card Renewal Application", "fields": 15, "language": "ta" },
-    { "id": "FORM_005", "name": "Kisan Credit Card (KCC) Scheme Form", "fields": 20, "language": "kn" }
+    {
+      "id": "FORM_001",
+      "name": "Aadhaar Address Update Form",
+      "category": "Identity & Citizenship",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Applicant Full Name", "type": "string" },
+        { "id": "F02", "name": "Existing Aadhaar Number", "type": "aadhaar" },
+        { "id": "F03", "name": "New Residential Address", "type": "string" },
+        { "id": "F04", "name": "Address Proof Document", "type": "document" }
+      ],
+      "eligibility_rules": {
+        "min_age": 0,
+        "max_income": null,
+        "required_documents": ["Electricity Bill", "Ration Card", "Passport", "Voter ID"]
+      }
+    },
+    {
+      "id": "FORM_002",
+      "name": "PAN Card Application Form 49A",
+      "category": "Taxation & Finance",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Full Name", "type": "string" },
+        { "id": "F02", "name": "Date of Birth", "type": "date" },
+        { "id": "F03", "name": "Identity Proof", "type": "document" }
+      ],
+      "eligibility_rules": {
+        "min_age": 0,
+        "note": "Minors require parent/guardian representation."
+      }
+    },
+    {
+      "id": "FORM_003",
+      "name": "Income & Asset Certificate Form",
+      "category": "Taxation & Finance",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Annual Household Income", "type": "number" },
+        { "id": "F02", "name": "Agricultural Land Area (acres)", "type": "number" },
+        { "id": "F03", "name": "Residential Flat Area (sq. ft.)", "type": "number" }
+      ],
+      "eligibility_rules": {
+        "max_annual_income_inr": 800000,
+        "max_agricultural_land_acres": 5.0,
+        "max_residential_flat_sqft": 1000
+      }
+    },
+    {
+      "id": "FORM_004",
+      "name": "Old Age Pension Scheme Application",
+      "category": "Social Welfare & Pensions",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Applicant Age", "type": "number" },
+        { "id": "F02", "name": "Annual Income", "type": "number" },
+        { "id": "F03", "name": "BPL Category Status", "type": "boolean" }
+      ],
+      "eligibility_rules": {
+        "min_age": 60,
+        "max_annual_income_inr": 50000,
+        "requires_bpl_card": true
+      }
+    },
+    {
+      "id": "FORM_005",
+      "name": "Kisan Credit Card (KCC) Scheme Form",
+      "category": "Land & Agriculture",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Land Holding Status", "type": "string" },
+        { "id": "F02", "name": "Crop Type", "type": "string" },
+        { "id": "F03", "name": "Aadhaar Card Linkage", "type": "boolean" }
+      ],
+      "eligibility_rules": {
+        "min_age": 18,
+        "max_age": 75,
+        "must_own_or_tenant_farm": true,
+        "requires_aadhaar": true
+      }
+    },
+    {
+      "id": "FORM_006",
+      "name": "Ayushman Bharat PM-JAY Health Card",
+      "category": "Social Welfare & Pensions",
+      "languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
+      "fields": [
+        { "id": "F01", "name": "Socio-Economic Category", "type": "string" },
+        { "id": "F02", "name": "Family Annual Income", "type": "number" }
+      ],
+      "eligibility_rules": {
+        "max_annual_income_inr": 250000,
+        "eligible_categories": ["SECC 2011 Deprived", "Ration Card Holder", "Occupational Vulnerable"]
+      }
+    }
   ]
 }

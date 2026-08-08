@@ -1,10 +1,14 @@
 {
   "probe_name": "Indic Script Subword Token Fertility Probe Set",
-  "description": "Tests subword tokenizer efficiency and token explosion ratios across Indic scripts",
+  "description": "Tests subword tokenizer efficiency and token explosion ratios across all 7 supported languages. Corpus is parallel by construction.",
+  "supported_languages": ["en", "hi", "bn", "te", "ta", "mr", "kn"],
   "probes": [
-    { "id": "P01", "script": "Devanagari", "text": "प्रधानमंत्री किसान सम्मान निधि योजना के तहत आवेदन कैसे करें?", "target_fertility_ratio": "< 1.4" },
-    { "id": "P02", "script": "Telugu", "text": "మీ ఆధార్ కార్డుతో పాన్ కార్డ్ అనుసంధానం చేయడం అత్యంత ముఖ్యం.", "target_fertility_ratio": "< 1.5" },
-    { "id": "P03", "script": "Tamil", "text": "முதியோர் ஓய்வூதியத் திட்டத்திற்கு விண்ணப்பிப்பதற்கான தகுதிகள் என்ன?", "target_fertility_ratio": "< 1.5" },
-    { "id": "P04", "script": "Kannada", "text": "ಉದ್ಯೋಗ ಖಾತ್ರಿ ಯೋಜನೆಯಡಿ ಲಭ್ಯವಿರುವ ಭತ್ಯೆಗಳು ಯಾವುವು?", "target_fertility_ratio": "< 1.5" }
+    { "id": "P01", "language": "en", "script": "Latin", "text": "What documents are required to update address in Aadhaar card?", "target_fertility_ratio": "< 1.2" },
+    { "id": "P02", "language": "hi", "script": "Devanagari", "text": "प्रधानमंत्री किसान सम्मान निधि योजना के तहत आवेदन कैसे करें?", "target_fertility_ratio": "< 1.4" },
+    { "id": "P03", "language": "bn", "script": "Bengali", "text": "বার্ধক্য ভাতা প্রকল্পের জন্য আবেদনের বয়সসীমা এবং যোগ্যতা কী?", "target_fertility_ratio": "< 1.5" },
+    { "id": "P04", "language": "te", "script": "Telugu", "text": "మీ ఆధార్ కార్డుతో పాన్ కార్డ్ అనుసంధానం చేయడం అత్యంత ముఖ్యం.", "target_fertility_ratio": "< 1.5" },
+    { "id": "P05", "language": "ta", "script": "Tamil", "text": "முதியோர் ஓய்வூதியத் திட்டத்திற்கு விண்ணப்பிப்பதற்கான தகுதிகள் என்ன?", "target_fertility_ratio": "< 1.5" },
+    { "id": "P06", "language": "mr", "script": "Devanagari", "text": "आय आणि मालमत्ता प्रमाणपत्रासाठी आवश्यक असणारी कागदपत्रे कोणती आहेत?", "target_fertility_ratio": "< 1.4" },
+    { "id": "P07", "language": "kn", "script": "Kannada", "text": "ಉದ್ಯೋಗ ಖಾತ್ರಿ ಯೋಜನೆಯಡಿ ಲಭ್ಯವಿರುವ ಭತ್ಯೆಗಳು ಯಾವುವು?", "target_fertility_ratio": "< 1.5" }
   ]
 }

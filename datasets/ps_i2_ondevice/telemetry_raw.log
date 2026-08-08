@@ -1,2 +1,1 @@
-# DELIBERATELY ZEROED TELEMETRY FILE
-# This baseline file is intentionally empty to enforce runtime cold-boot profiling on target mobile hardware.
+# TELEMETRY_BASELINE_LOG: zeroed for cold-boot profiling

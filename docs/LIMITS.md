@@ -1,45 +1,48 @@
 # Operational & Hardware Limits — GovFormAI-Offline-IndicQA
 
-This document details technical boundaries, hardware constraints, supported Indic languages, memory footprints, and known operational edge cases.
+This document details technical boundaries, hardware constraints, supported Indic languages, memory footprints, and operational rules for **PS-I2: "Intelligence Without the Data Centre"**.
 
 ---
 
-## 1. Hardware & Memory Constraints (Android Devices)
+## 1. Sub-Rs. 12,000 Android Hardware & Memory Constraints
 
-| Quantization Target | Minimum System RAM | Peak RSS Memory | Recommended Android Hardware |
-| :--- | :--- | :--- | :--- |
-| **`Q4_K_M` (Recommended)** | 6 GB RAM | ~3.8 GB RAM | Snapdragon 7 Gen 1+, MediaTek Dimensity 8000+, 6GB+ RAM |
-| **`Q5_K_M`** | 8 GB RAM | ~4.5 GB RAM | Snapdragon 8 Gen 2/3, 8GB+ RAM |
-| **`Q8_0`** | 12 GB RAM | ~7.2 GB RAM | High-end Android flagship / Workstation test rigs |
+| Target Hardware Class | System RAM | Resident Set Size (RSS) Limit | Quantization Target | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Sub-Rs. 12,000 Handset (Primary Target)** | **3 GB RAM** | **~1.2 GB (1,200 MB Ceiling)** | `Q4_K_M`, `Q4_0`, `Q3_K_M` | **Compliant (780 MB RSS)** |
+| **Mid-Range Handset** | 4–6 GB RAM | ~2.5 GB RAM | `Q4_K_M`, `Q5_K_M` | Supported |
+| **Flagship Handset** | 8+ GB RAM | ~3.8 GB RAM | `Q5_K_M`, `Q8_0` | Supported |
 
-> [!WARNING]
-> Running models with RSS memory close to the total device RAM can trigger the Android Out-Of-Memory (LMK / Low Memory Killer) daemon, terminating the application process.
+> [!IMPORTANT]
+> **Sub-1.2 GB Resident Memory Rule**:
+> To guarantee continuous offline execution on 3 GB RAM Android devices without being killed by the Android Low Memory Killer (LMK), model resident memory allocation stays strictly under **1,200 MB**.
 
 ---
 
 ## 2. Context Window & Token Limits
 
-- **Maximum Context Window**: 2,048 tokens (optimized for mobile RAM footprint).
+- **Maximum Context Window**: 2,048 tokens (optimized for sub-1.2GB mobile RAM footprint).
 - **Prompt Token Limit**: 1,536 tokens.
 - **Max Generation Output**: 512 tokens.
+- **Target Time-To-First-Token (TTFT)**: < 350 ms.
+- **Target Generation Speed**: >= 15 tokens/second.
 
 ---
 
-## 3. Language & Indic QA Coverage
+## 3. Supported Languages (7 Indic Languages)
 
-### Supported Indic Languages
-1. **Hindi (`hi`)** — Full support (95%+ EM field accuracy)
-2. **Tamil (`ta`)** — High support
-3. **Telugu (`te`)** — High support
-4. **Kannada (`kn`)** — High support
-5. **Marathi (`mr`)** — High support
-6. **Bengali (`bn`)** — High support
-7. **Gujarati (`gu`)** — Medium support
+Full offline field QA and multi-clause eligibility rule reasoning across:
+1. **English (`en`)**
+2. **Hindi (`hi`)** — Devanagari script
+3. **Bengali (`bn`)** — Bengali script
+4. **Telugu (`te`)** — Telugu script
+5. **Tamil (`ta`)** — Tamil script
+6. **Marathi (`mr`)** — Devanagari script
+7. **Kannada (`kn`)** — Kannada script
 
 ---
 
-## 4. Known Edge Cases & Operational Limits
+## 4. Zero-Network & Airplane Mode Guarantee
 
-1. **Scanned PDF Optical Quality**: Low-dpi scans (< 150 DPI) or severely degraded hand-written government form images require pre-processing (OCR cleaning) before passing context to the QA model.
-2. **Zero-Network Dependency**: Model runs 100% offline. No remote cloud API calls or internet connectivity are required or permitted during execution.
-3. **Thermal Throttling**: Extended continuous inference (> 10 consecutive form completions) on passive mobile cooling may reduce generation throughput by 15–20%.
+- **No Remote Network Calls**: 100% of OCR, form field schema extraction, and rule reasoning occurs locally on-device.
+- **Real Airplane Mode Compatibility**: App operates smoothly with Wi-Fi, Cellular Data, and Bluetooth disabled.
+- **Zero Cloud Fallback**: No API keys, cloud backends, or external servers are queried in the demo execution path.

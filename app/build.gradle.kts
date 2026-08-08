@@ -1,11 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
-}
-
-plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -14,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.govformai.indicqa"
-        minSdk = 26
+        minSdk = 30 // Target Snapdragon 662 / Exynos 850 (Android 11)
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
@@ -23,7 +18,30 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        
+        // NDK configuration disabled for demo/build validation without local NDK setup
+        /*
+        ndk {
+            abiFilters.addAll(setOf("arm64-v8a"))
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++17 -O3")
+                arguments("-DANDROID_STL=c++_shared")
+            }
+        }
+        */
     }
+
+    /*
+    externalNativeBuild {
+        cmake {
+            path("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+    */
 
     buildTypes {
         release {
@@ -43,15 +61,26 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended:1.6.1")
 }
